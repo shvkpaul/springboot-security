@@ -1,6 +1,7 @@
 package com.shvk.security.controller;
 
 import com.shvk.security.model.Student;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class StudentController {
         return students;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/students")
     public Student createStudent(@RequestBody Student student){
         students.add(student);
