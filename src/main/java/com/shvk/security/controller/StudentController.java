@@ -10,8 +10,9 @@ import java.util.List;
 @RestController
 @RequestMapping("v1")
 public class StudentController {
-    private List<Student> students = new ArrayList<>();
+    private final List<Student> students = new ArrayList<>();
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/students")
     public List<Student> students() {
         Student student1 = new Student(1, "shouvik", "paul");
@@ -25,7 +26,7 @@ public class StudentController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/students")
-    public Student createStudent(@RequestBody Student student){
+    public Student createStudent(@RequestBody Student student) {
         students.add(student);
         return student;
     }

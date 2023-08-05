@@ -19,12 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    //authorization
+        //authorization
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(AbstractHttpConfigurer::disable) // replaced lamda csrf -> csrf.disable()
@@ -48,6 +48,6 @@ public class SecurityConfig {
             .roles("ADMIN")
             .build();
 
-        return new InMemoryUserDetailsManager(user,admin);
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }
